@@ -1,5 +1,6 @@
 #![doc = include_str!("../README.md")]
 
+pub use itertools;
 pub use paste;
 pub use wide;
 
@@ -34,7 +35,7 @@ macro_rules! slices_dispatch_wide {
         $crate::paste::paste! {
             for (
                 $([< original_ $name >]),+
-            ) in ::itertools::izip!(
+            ) in $crate::itertools::izip!(
                 $($crate::slices_dispatch_wide!(@get_chunks $($mut_ident)? $src, $width)),+
             ) {
                 $(
@@ -53,7 +54,7 @@ macro_rules! slices_dispatch_wide {
 
             for (
                 $([< original_ $name >]),+
-            ) in ::itertools::izip!(
+            ) in $crate::itertools::izip!(
                 $($crate::slices_dispatch_wide!(@get_remainder $($mut_ident)? $src, $width)),+
             ) {
                $(
